@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { shuffle } from "lodash";
 import Image from "next/image";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const POSSIBLE_COLOUR_IDENTITIES = [
   "w",
@@ -111,9 +112,9 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
                 {rerollsRemaining[index] > 0 && (
                   <button
                     onClick={() => handleReroll(index)}
-                    className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-0"
+                    className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center m-0"
                   >
-                    REROLL
+                    <RefreshIcon />
                   </button>
                 )}
               </td>
