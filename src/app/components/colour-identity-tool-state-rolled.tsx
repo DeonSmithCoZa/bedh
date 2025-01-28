@@ -41,6 +41,9 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
   const [colourIdentities, setColourIdentities] = useState<string[]>([]);
 
   const values = getValues<string>("names");
+  const allowDuplicates: boolean = getValues("allowDuplicates");
+  console.log(allowDuplicates);
+
   const names = useMemo<string[]>(
     () => shuffle(values.split("\n").map((name: string) => name.trim())),
     [values]
@@ -53,13 +56,16 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
     const shuffledIdentities = shuffle(POSSIBLE_COLOUR_IDENTITIES);
     for (let i = 0; i < names.length; i++) {
       newColourIdentities.push(
-        shuffledIdentities
+        (allowDuplicates
+          ? shuffle(POSSIBLE_COLOUR_IDENTITIES)
+          : shuffledIdentities
+        )
           .filter((id) => !newColourIdentities.includes(id))
           .pop() as string
       );
     }
     setColourIdentities(newColourIdentities);
-  }, [names]);
+  }, [names, allowDuplicates]);
 
   const [rerollsRemaining, setRerollsRemaining] = useState<number[]>(
     names.map(() => MAX_REROLLS)
@@ -70,7 +76,9 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
     newRerollsRemaining[index] -= 1;
     setRerollsRemaining(newRerollsRemaining);
     colourIdentities[index] = shuffle(
-      POSSIBLE_COLOUR_IDENTITIES.filter((id) => !colourIdentities.includes(id))
+      POSSIBLE_COLOUR_IDENTITIES.filter(
+        (id) => allowDuplicates || !colourIdentities.includes(id)
+      )
     ).pop() as string;
   };
 

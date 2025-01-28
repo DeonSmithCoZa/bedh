@@ -1,3 +1,4 @@
+import CheckBox from "./checkbox";
 import TextArea from "./textarea";
 
 const ColourIdentityToolStateDefault: React.FC = () => (
@@ -9,6 +10,11 @@ const ColourIdentityToolStateDefault: React.FC = () => (
       placeholder={`e.g. John
 Jessica
 Drew`}
+    />
+    <CheckBox
+      label="Allow duplicate colour identities"
+      id="allowDuplicates"
+      source="allowDuplicates"
     />
     <div className="text-right mt-4">
       <button
