@@ -42,7 +42,6 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
 
   const values = getValues<string>("names");
   const allowDuplicates: boolean = getValues("allowDuplicates");
-  console.log(allowDuplicates);
 
   const names = useMemo<string[]>(
     () => shuffle(values.split("\n").map((name: string) => name.trim())),
