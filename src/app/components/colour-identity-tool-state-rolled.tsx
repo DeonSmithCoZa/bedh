@@ -50,13 +50,12 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
     if (!names.length) return;
 
     const newColourIdentities: string[] = [];
+    const shuffledIdentities = shuffle(POSSIBLE_COLOUR_IDENTITIES);
     for (let i = 0; i < names.length; i++) {
       newColourIdentities.push(
-        shuffle(
-          POSSIBLE_COLOUR_IDENTITIES.filter(
-            (id) => !newColourIdentities.includes(id)
-          )
-        ).pop() as string
+        shuffledIdentities
+          .filter((id) => !newColourIdentities.includes(id))
+          .pop() as string
       );
     }
     setColourIdentities(newColourIdentities);
@@ -112,6 +111,7 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
                 {rerollsRemaining[index] > 0 && (
                   <button
                     onClick={() => handleReroll(index)}
+                    title={`Re-roll colour identity: ${rerollsRemaining[index]} remaining`}
                     className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center m-0"
                   >
                     <RefreshIcon />
