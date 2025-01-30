@@ -40,16 +40,34 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
   const { getValues } = useFormContext();
   const [colourIdentities, setColourIdentities] = useState<string[]>([]);
 
-  const values = getValues<string>("names");
+  const nameValues = getValues<string>("names");
   const allowDuplicates: boolean = getValues("allowDuplicates");
+  const identityValues: string[] = getValues("values");
+  const rerollValues: number[] = getValues("rerolls");
 
   const names = useMemo<string[]>(
-    () => shuffle(values.split("\n").map((name: string) => name.trim())),
-    [values]
+    () => shuffle(nameValues.split("\n").map((name: string) => name.trim())),
+    [nameValues]
+  );
+  const unshuffledNames = useMemo(
+    () => nameValues.split("\n").map((name: string) => name.trim()),
+    [nameValues]
   );
 
   useEffect(() => {
     if (!names.length) return;
+
+    if (identityValues) {
+      const newColourIdentities: string[] = [];
+
+      for (let i = 0; i < names.length; i++) {
+        const indexInUnshuffled = unshuffledNames.indexOf(names[i]);
+        newColourIdentities.push(identityValues[indexInUnshuffled]);
+      }
+
+      setColourIdentities(newColourIdentities);
+      return;
+    }
 
     const newColourIdentities: string[] = [];
     const shuffledIdentities = shuffle(POSSIBLE_COLOUR_IDENTITIES);
@@ -64,11 +82,21 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
       );
     }
     setColourIdentities(newColourIdentities);
-  }, [names, allowDuplicates]);
+  }, [names, allowDuplicates, identityValues, nameValues, unshuffledNames]);
 
-  const [rerollsRemaining, setRerollsRemaining] = useState<number[]>(
-    names.map(() => MAX_REROLLS)
-  );
+  const [rerollsRemaining, setRerollsRemaining] = useState<number[]>([]);
+
+  useEffect(() => {
+    const rerolls = names.map((name) => {
+      if (rerollValues) {
+        const indexInUnshuffled = unshuffledNames.indexOf(name);
+        return rerollValues[indexInUnshuffled];
+      }
+
+      return MAX_REROLLS;
+    });
+    setRerollsRemaining(rerolls);
+  }, [names, rerollValues, unshuffledNames]);
 
   const handleReroll = (index: number) => {
     const newRerollsRemaining = [...rerollsRemaining];
