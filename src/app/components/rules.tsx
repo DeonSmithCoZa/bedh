@@ -1,5 +1,8 @@
 import SectionBody from "./section-body";
 
+const CARD_COST_LIMIT = 5;
+const DECK_LIMIT = 50;
+
 const Rules: React.FC = () => (
   <SectionBody title="Rules">
     <p className="mb-2">
@@ -7,8 +10,10 @@ const Rules: React.FC = () => (
     </p>
     <ul className="list-disc list-inside">
       <li>
-        $50 budget (using TCG Player pricing) for the entire deck, excluding
-        basic lands and your commander.
+        ${DECK_LIMIT} budget (using TCG Player pricing) for the entire deck,
+        excluding basic lands and your commander. If you run partners,
+        backgrounds, etc. one of the commanders must be included in the $
+        {DECK_LIMIT} budget.
       </li>
       <li>
         Random commander colour identity assigned. Only 1, 2 and 3 colour.
@@ -19,8 +24,8 @@ const Rules: React.FC = () => (
         100.
       </li>
       <li>
-        No individual card over $5 in value (looking at the cheapest printing)
-        including the commander.
+        No individual card over ${CARD_COST_LIMIT} in value (looking at the
+        cheapest printing) including the commander.
       </li>
       <li>All normal commander rules apply (including the banlist)</li>
       <li>
