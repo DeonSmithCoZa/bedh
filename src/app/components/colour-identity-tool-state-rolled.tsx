@@ -62,7 +62,21 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
 
       for (let i = 0; i < names.length; i++) {
         const indexInUnshuffled = unshuffledNames.indexOf(names[i]);
-        newColourIdentities.push(identityValues[indexInUnshuffled]);
+        
+        let ci;
+        if (!identityValues[indexInUnshuffled]) {          
+          ci = shuffle(
+            POSSIBLE_COLOUR_IDENTITIES.filter(
+              (ci) =>
+                !newColourIdentities.includes(ci) &&
+                !identityValues.includes(ci)
+            )
+          ).pop() as string;
+        } else {
+          ci = identityValues[indexInUnshuffled];
+        }
+
+        newColourIdentities.push(ci);
       }
 
       setColourIdentities(newColourIdentities);
@@ -90,7 +104,7 @@ const ColourIdentityToolStateRolled: React.FC<{ handleReset: () => void }> = ({
     const rerolls = names.map((name) => {
       if (rerollValues) {
         const indexInUnshuffled = unshuffledNames.indexOf(name);
-        return rerollValues[indexInUnshuffled];
+        return rerollValues[indexInUnshuffled] ?? MAX_REROLLS;
       }
 
       return MAX_REROLLS;
