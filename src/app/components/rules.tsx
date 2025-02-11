@@ -19,8 +19,7 @@ const Rules: React.FC = () => (
         Random commander colour identity assigned. Only 1, 2 and 3 colour.
       </li>
       <li>
-        No commander from the top 100 on EDHRec (In all 3 tabs, years, months,
-        weeks). No restriction on the 99. If running partners, backgrounds, etc.
+        No commander from the top 100 on EDHRec (In years and month tabs). No restriction on the 99. If running partners, backgrounds, etc.
         both need to be outside of the top 100.
       </li>
       <li>
