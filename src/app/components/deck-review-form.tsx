@@ -5,17 +5,19 @@ import TextArea from "./textarea";
 import Input from "./input";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import getConfig from "next/config";
 
 const DeckReviewForm: React.FC = () => {
   const form = useForm();
+  const { publicRuntimeConfig } = getConfig();
 
   const onSubmit = form.handleSubmit(async (values: unknown) => {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/decks`,
+      `${publicRuntimeConfig.apiUrl}/decks`,
       values,
       {
         headers: {
-          ["x-api-key"]: process.env.NEXT_PUBLIC_API_KEY,
+          ["x-api-key"]: publicRuntimeConfig.apiKey,
         },
       }
     );
