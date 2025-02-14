@@ -22,14 +22,27 @@ const DeckReviewForm: React.FC = () => {
 
     if (response.status !== 201) {
       // TODO: Some error happened
-      alert("An error occurred. This $#!% is still work in progress. Let me know if you see this message.");
+      alert(
+        "An error occurred. This $#!% is still work in progress. Let me know if you see this message."
+      );
     }
 
     const deckId = response.data._id;
-    redirect(`/deck/${deckId}`);
+    redirect(`/deck?_id=${deckId}`);
   });
 
-  return (
+  const searchParams =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window?.location?.search)
+      : new URLSearchParams();
+  const id = searchParams.get("_id");
+
+  return id ? (
+    <>
+      TODO REVIEW STATUS BOOKMARK THIS PAGE TO SEE YOUR STATUS ONCE EVERYTHING
+      IS DONE
+    </>
+  ) : (
     <FormProvider {...form}>
       <form className="min-h-[280px]" onSubmit={onSubmit}>
         <Input
