@@ -10,6 +10,12 @@ const ColourIdentityToolStateDefault: React.FC = () => (
       placeholder={`e.g. John
 Jessica
 Drew`}
+      options={{
+        required: {
+          value: true,
+          message: "Please provide at least 1 name",
+        },
+      }}
     />
     <CheckBox
       label="Allow duplicate colour identities"

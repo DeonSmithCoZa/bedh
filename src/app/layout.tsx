@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Gajraj_One, Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
+import Header from "./components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,14 +46,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-const Header: React.FC = () => (
-  <header className="p-4 mb-8">
-    <h1 className="text-center text-8xl font-gajraj">
-      <span className="inline-block bg-[#DFA] text-black rounded-md px-3 mr-1">
-        b
-      </span>
-      EDH
-    </h1>
-  </header>
-);

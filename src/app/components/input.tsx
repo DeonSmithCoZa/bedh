@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { RegisterOptions, useFormContext } from "react-hook-form";
 import { isEmpty } from "lodash";
 
-const TextArea: React.FC<{
+const Input: React.FC<{
   label: string;
   id: string;
   source: string;
@@ -28,9 +28,9 @@ const TextArea: React.FC<{
         >
           {label}
         </label>
-        <textarea
+        <input
+          type="text"
           id={id}
-          rows={8}
           className={clsx(
             "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border dark:bg-gray-600 dark:text-white",
             hasError &&
@@ -40,10 +40,10 @@ const TextArea: React.FC<{
           )}
           placeholder={errors?.[source]?.message?.toString() ?? placeholder}
           {...register(source, options)}
-        ></textarea>
+        />
       </div>
     </>
   );
 };
 
-export default TextArea;
+export default Input;
