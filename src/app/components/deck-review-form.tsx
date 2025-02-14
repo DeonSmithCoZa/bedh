@@ -11,7 +11,7 @@ const DeckReviewForm: React.FC = () => {
 
   const onSubmit = form.handleSubmit(async (values: unknown) => {
     const response = await axios.post(
-      `https://bedh-059600d8e13c.herokuapp.com:3000/decks`,
+      `https://bedh-059600d8e13c.herokuapp.com/decks`,
       values
     );
 
