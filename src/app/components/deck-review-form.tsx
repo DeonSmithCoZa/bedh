@@ -4,7 +4,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import TextArea from "./textarea";
 import Input from "./input";
 import axios from "axios";
-import { redirect } from "next/navigation";
 
 const DeckReviewForm: React.FC = () => {
   const form = useForm();
@@ -23,7 +22,7 @@ const DeckReviewForm: React.FC = () => {
     }
 
     const deckId = response.data._id;
-    redirect(`/deck?_id=${deckId}`);
+    window.location.href = `/deck?_id=${deckId}`;
   });
 
   const searchParams =
