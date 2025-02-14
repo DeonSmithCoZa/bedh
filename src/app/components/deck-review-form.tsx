@@ -9,17 +9,10 @@ import { redirect } from "next/navigation";
 const DeckReviewForm: React.FC = () => {
   const form = useForm();
 
-  console.log(process.env);
-
   const onSubmit = form.handleSubmit(async (values: unknown) => {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/decks`,
-      values,
-      {
-        headers: {
-          ["x-api-key"]: process.env.NEXT_PUBLIC_API_KEY,
-        },
-      }
+      `https://bedh-059600d8e13c.herokuapp.com/decks`,
+      values
     );
 
     if (response.status !== 201) {
